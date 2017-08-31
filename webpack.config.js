@@ -14,7 +14,7 @@ function getOutput() {
 	if(prod) {
 		return path.resolve(__dirname, "build/" )  
 	} else {
-		return path.resolve(__dirname, "test/assets/" )  
+		return path.resolve(__dirname, "dev/dist/assets/" )  
 	}
 	
 }
@@ -23,9 +23,14 @@ const settings = {
 	hotPort: 8158,
 	cache: !prod,
 	debug: !prod,
+	inline: true,
+	color: true,
+	host: '0.0.0.0',
 	entry: {
-		app: prod ? ['./src/alfrid.js'] : ['./src/test/app.js']
+		app: prod ? ['./src/alfrid.js'] : ['./src/test/app.js', `webpack-dev-server/client?http://${serverIp}:8158`,]
 	},
+	contentBase: 'dev/dist',
+	publicPath: `http://${serverIp}:8158/assets/`,
 	stats: {
 		cached: false,
 		cachedAssets: false,
@@ -87,7 +92,10 @@ const settings = {
 			}
 		}),
 		new ExtractTextPlugin('css/main.css')
-	] : [new webpack.optimize.OccurenceOrderPlugin()]
+		] : [
+		new webpack.optimize.OccurenceOrderPlugin(),
+		new webpack.HotModuleReplacementPlugin()
+		]
 };
 
 if(prod) {

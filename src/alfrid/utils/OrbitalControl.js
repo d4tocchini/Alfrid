@@ -43,7 +43,11 @@ class OrbitalControl {
 		this._isInvert       = false;
 		this.sensitivity	 = 1.0;
 
+<<<<<<< Updated upstream
 		this._listenerTarget.addEventListener('mousewheel', (e) => this._onWheel(e));
+=======
+		this._listenerTarget.addEventListener('mousewheel', (e) => this._onWheel(e), { passive: true });
+>>>>>>> Stashed changes
 		this._listenerTarget.addEventListener('DOMMouseScroll', (e) => this._onWheel(e));
 
 		this._listenerTarget.addEventListener('mousedown', (e) => this._onDown(e));
