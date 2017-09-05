@@ -2,7 +2,8 @@
   "name": "alfrid",
   "version": "0.1.28",
   "description": "WebGL 3D toolkit",
-  "main": "src/alfrid.js",
+  "main": "build/alfrid.js",
+  "module": "src/alfrid.js",
   "directories": {
     "example": "examples"
   },
