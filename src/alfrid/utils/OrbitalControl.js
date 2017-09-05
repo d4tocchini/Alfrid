@@ -1,9 +1,7 @@
 // OrbitalControl.js
-'use strict';
-
 import EaseNumber from './EaseNumber';
 import Scheduler from  'scheduling';
-import glm from 'gl-matrix';
+import { vec3 } from 'gl-matrix';
 
 const getMouse = function (mEvent, mTarget) {
 
@@ -27,11 +25,11 @@ class OrbitalControl {
 		this._listenerTarget = mListenerTarget;
 		this._mouse          = {};
 		this._preMouse       = {};
-		this.center          = glm.vec3.create();
-		this._up             = glm.vec3.fromValues(0, 1, 0);
+		this.center          = vec3.create();
+		this._up             = vec3.fromValues(0, 1, 0);
 		this.radius          = new EaseNumber(mRadius);
-		this.position        = glm.vec3.fromValues(0, 0, this.radius.value);
-		this.positionOffset  = glm.vec3.create();
+		this.position        = vec3.fromValues(0, 0, this.radius.value);
+		this.positionOffset  = vec3.create();
 		this._rx             = new EaseNumber(0);
 		this._rx.limit(-Math.PI / 2, Math.PI / 2);
 		this._ry             = new EaseNumber(0);
@@ -43,11 +41,7 @@ class OrbitalControl {
 		this._isInvert       = false;
 		this.sensitivity	 = 1.0;
 
-<<<<<<< Updated upstream
-		this._listenerTarget.addEventListener('mousewheel', (e) => this._onWheel(e));
-=======
 		this._listenerTarget.addEventListener('mousewheel', (e) => this._onWheel(e), { passive: true });
->>>>>>> Stashed changes
 		this._listenerTarget.addEventListener('DOMMouseScroll', (e) => this._onWheel(e));
 
 		this._listenerTarget.addEventListener('mousedown', (e) => this._onDown(e));
@@ -153,7 +147,7 @@ class OrbitalControl {
 		const tr = Math.cos(this._rx.value) * this.radius.value;
 		this.position[0] = Math.cos(this._ry.value + Math.PI * 0.5) * tr;
 		this.position[2] = Math.sin(this._ry.value + Math.PI * 0.5) * tr;
-		glm.vec3.add(this.position, this.position, this.positionOffset);
+		vec3.add(this.position, this.position, this.positionOffset);
 	}
 
 

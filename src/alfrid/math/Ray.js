@@ -1,9 +1,6 @@
 // Ray.js
 
-import glm from 'gl-matrix';
-
-const mat4 = glm.mat4;
-const vec3 = glm.vec3;
+import { mat4, vec3 } from 'gl-matrix';
 
 const a = vec3.create();
 const b = vec3.create();
