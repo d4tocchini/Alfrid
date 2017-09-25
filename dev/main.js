@@ -18,6 +18,7 @@ function render() {
 
 
 function onModelLoaded(o) {
+	console.log(o);
 	const { name, modelMatrix, mesh } = o;
 	console.log('Model Loaded ', name);
 	console.log('mesh : ', mesh);
@@ -29,9 +30,8 @@ function onModelLoaded(o) {
 
 	const boneIndex = getNormalisedArray(bone_indices, 4);
 	const weight = getNormalisedArray(weights, 4);
-
-
 	console.table(bones);
+
 
 	shader = new GLShader(vs);
 	cube = new Mesh();
@@ -42,6 +42,11 @@ function onModelLoaded(o) {
 
 	cube.bufferData(boneIndex, 'aBoneIndex');
 	cube.bufferData(weight, 'aWeight');
+
+	shader.bind();
+	bones.forEach( (bone, i) => {
+		shader.uniform(`joint${i}`, "mat4", bone[1]);
+	});
 }
 
 
